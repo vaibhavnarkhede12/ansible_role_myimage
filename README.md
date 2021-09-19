@@ -6,19 +6,20 @@
    create a folder where we will be creating the ansible roles and make a folder roles and run the below command  eg: ansible/roles/
    
 2. create a folder ansiblerole_myimage
-<!--    - roles
-      -  myimage 
-   main.yml -->
+   - roles
+      -  myimage  
+      
+  	 main.yml
    
    
 3. In main.yml copy below 4 lines
 4. if ansible needs to run on localhost give host as localhost
 
-<!--    - hosts: all
-     become: true
-     roles:
+   - hosts: all 
+     become: true 
+     roles: 
       - myimage
- -->
+
 
 5. go to ansiblerole_myimage folder
    and run the command 
