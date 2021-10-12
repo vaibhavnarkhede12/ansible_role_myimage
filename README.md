@@ -40,10 +40,11 @@
    and run the command 
    ansibe-playbook --connection=local ./main.yml)
    
+``
 ########################################################################## 
 ############################### SSSH KEYS ################################
 ##########################################################################
-
+``
 * there are two machines 
    main refers to ansible 
    host refers to the slave machine in which we will remotely execute ansible 
