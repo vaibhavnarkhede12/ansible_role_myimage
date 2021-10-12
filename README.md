@@ -27,25 +27,25 @@
    
    
 ############################### SSSH KEYS ##############################################   
-   
-exit from root from both and come to normal user profiles for eg my user profile is vaibhav
 
+* there are two machines 
+   main refers to ansible 
+   host refers to the slave machine in which we will remotely execute ansible 
 
-to add ssh keys in ansible slave server install ssh clients 
-run command:  sudo apt install openssh-server openssh-client
-
-create ssh key in ansible host : ssh-keygen 
-and run : ssh-copy-id vaibhav@192.168.1.106
-
-once successful 
-run ssh vaibhav@192.168.1.106
+ * GO to the root profiles in both systems
+ * in the both machine install ssh clients
+   *  sudo apt-get install openssh-client openssh-server
+ * in the slave machine 
+   * go to /etc/ssh/sshd_config file and change three params
+      PermitRootLogin yes
+      AuthorizedKeysFile .ssh/authorized_keys
+   * systemctl restart sshd
+ * in the main machine , 
+   * create SSH keys : ssh-keygen  ( do not give any passwords , just hit enter)
+   * copy the ssh key create in /root/.ssh/id_rsa.pub to the slave machine path /root/.ssh/authorized_keys
+   * restart the ssh daemon in slave machine ( systemctl restart sshd )
+   * try to ssh in the slave using ssh root@IpOfSlaveMachine  ( IP command ifconfig)
 
 ###########################################################################################
 
 ansible-playbook -u vaibhav --private-key /root/.ssh/id_rsa.pub -i 192.168.1.106 /mnt/ansibletesting/main.yml
-
-
-
-   
-host ssh ket
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCw4TojRWi5VNkpGfsFYXDPow3c1PikkEfS2YUzE7mJpCwQ9CbaKHQkN+1gmrRTClar/3EoHU7P+POFhCjUVgDf8+PHKPN7cYCqateNd61lSXAC+nfWNAYPXx1127OsBz4TAz7jqLWTsBWeVLmljWEoPimqPkh1KYClhjiXVzMqD++9cxXAVSc9FmT4eNEMHlyM8Fa3OZsheUPujzqK/ipTzYuLZ9H2r2kXUtPdOSjnyQGTlnY/tBP3pOjqvy0Wp1VKZPq0KrU9ZAsQQIqJoUlQA9x2nZcDl3F3DLb5pwZMuGs1I3ocWbVuxIBH5nnONx4ED89cgUdYPWcF15Y/LP148oZV2eYOsilMggW2LnO37HngtqlSCCiVaDLZ6kuQ4lYBRGmTD9bXT51ntC2F2xBHIYDJhBUaejK+Y7Qc9usEjquIBtuFIzkpoVPb36K3RjJuzNPGSY7i86pUNnPQHfnqDs3jsL3umWwDAHpS4z5ev0nZgqPSd5F3tniAfptB01c= root@vaibhav-VirtualBox
