@@ -3,14 +3,16 @@
 
 1. sudo apt install ansible
    
-   create a folder where we will be creating the ansible roles and make a folder roles and run the below command  eg: ansible/roles/
-   
-2. create a folder ansiblerole_myimage
-   - roles
-      -  myimage  
-      
-  	 main.yml
-   
+2. create a folder where we will be creating the ansible roles and make a folder roles and run the below command  eg: ansibletesting
+- ── main.yml
+- ── roles
+    - └── ansible_role_myimage
+      -    ├── files
+              -  └── init-script.bash
+      -    ├── README.md
+      -    └── tasks
+              -  └── main.yml
+
    
 3. In main.yml copy below 4 lines
 4. if ansible needs to run on localhost give host as localhost
@@ -19,7 +21,16 @@
      become: true 
      roles: 
       - myimage
+      
+5. if ansible needs to be run on a slave machine 
+   edit the /etc/ansible/hosts file in main machine and add the Ip of slave machine anywhere there 
+   and make sure the " hosts: all " is specified in the main.yml file 
 
+6. you can write ansible tasks in the main.yml file in tasks folder 
+7. follow the SSH-KEYS section now 
+
+8. once SSH connection works you can run the ansble using 
+   -  ansible-playbook -u root /mnt/ansibletesting/main.yml
 
 5. go to ansiblerole_myimage folder
    and run the command 
